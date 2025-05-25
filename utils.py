@@ -1,7 +1,6 @@
 import pickle
 import os
 import librosa
-import numpy as np
 
 # Fonction pour extraire les MFCC (identique à avant)
 def extract_mfcc(wav_file, n_mfcc=13):
