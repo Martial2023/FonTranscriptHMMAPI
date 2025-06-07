@@ -9,7 +9,7 @@ hmm_models, vocab = load_hmm_models(model_dir="hmm_models", vocab_file="vocab.pk
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Your Next.js frontend origin
+    allow_origins=["http://localhost:3000", "https://gbe-ce.vercel.app/", "*"],  # Your Next.js frontend origin
     allow_credentials=True,
     allow_methods=["GET", "POST", "OPTIONS"],  # Explicitly allow methods
     allow_headers=["*"],  # Allow all headers
@@ -30,18 +30,7 @@ async def transcribe_audio(audio: UploadFile = File(...)):
         predicted_words = " ".join(decode_audio(file_path, hmm_models, vocab))
 
         # Simulate transcription (replace with your Markov model)
-        transcription = predicted_words + """
-        Random
-        Xókwín "kannumɔ ajɔ̌", "kannumɔ ajɔ̌" kpo "kannumɔ wiwi sín ajɔ̌" kpo nɔ xlɛ́ ɖɔ è 
-        nɔ sà kannumɔ wiwi Aflika tɔn lɛ, nǔ e jɛ ɖò hwenuxó mɛ é ɖé wɛ bɔ è nya mɛ livi 
-        mɔkpan sín tò ɔ mɛ ɖò xwè kanweko atɔn mɔ̌ vlamɛ.
-        Xókwín "kannumɔ ajɔ̌", "kannumɔ ajɔ̌" kpo "kannumɔ wiwi sín ajɔ̌" kpo nɔ xlɛ́ ɖɔ è 
-        nɔ sà kannumɔ wiwi Aflika tɔn lɛ, nǔ e jɛ ɖò hwenuxó mɛ é ɖé wɛ bɔ è nya mɛ livi 
-        mɔkpan sín tò ɔ mɛ ɖò xwè kanweko atɔn mɔ̌ vlamɛ.
-        Xókwín "kannumɔ ajɔ̌", "kannumɔ ajɔ̌" kpo "kannumɔ wiwi sín ajɔ̌" kpo nɔ xlɛ́ ɖɔ è 
-        nɔ sà kannumɔ wiwi Aflika tɔn lɛ, nǔ e jɛ ɖò hwenuxó mɛ é ɖé wɛ bɔ è nya mɛ livi 
-        mɔkpan sín tò ɔ mɛ ɖò xwè kanweko atɔn mɔ̌ vlamɛ.
-        """
+        transcription = predicted_words
 
         # Delete the temporary file
         os.remove(file_path)

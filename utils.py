@@ -1,6 +1,9 @@
 import pickle
 import os
 import librosa
+import json
+
+translations = json.load(open("translations.json", "r"))
 
 # Fonction pour extraire les MFCC (identique à avant)
 def extract_mfcc(wav_file, n_mfcc=13):
@@ -37,18 +40,14 @@ def decode_audio(wav_file, hmm_models, vocab, n_mfcc=13):
         except:
             continue
     # Retourner les top 3 mots prédits
-    predicted_words = sorted(scores, key=scores.get, reverse=True)[:3]
+    predicted_words = sorted(scores, key=scores.get, reverse=True)[:10]
     return predicted_words
 
-# Exemple d'utilisation
-def main():
-    # Charger les modèles et le vocabulaire
-    
-    
-    # Tester sur un nouveau fichier audio
-    test_wav = "/path/to/new_audio.wav"  # Remplacer par le chemin du fichier à transcrire
-    predicted_words = decode_audio(test_wav, hmm_models, vocab)
-    print("Transcription prédite:", " ".join(predicted_words))
-
-if __name__ == "__main__":
-    main()
+# Étape 2 : Traduire une phrase
+def translate_sentence(sentence):
+    translated_sentence = []
+    for word in sentence.split():
+        # Chercher le mot dans le dictionnaire
+        translated_word = translations.get(word, word)  # Si le mot n'est pas trouvé, on le laisse tel quel
+        translated_sentence.append(translated_word)
+    return ' '.join(translated_sentence)
