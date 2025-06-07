@@ -24,7 +24,7 @@ Bienvenue dans notre projet de transcription de texte en langue Fon. Cette appli
 
 1. Clonez le dépôt :
    ```bash
-   git clone <url-du-repo>
+   git clone https://github.com/Martial2023/FonTranscriptHMMAPI.git
    ```
 2. Accédez au répertoire FastAPI :
    ```bash
