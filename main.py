@@ -16,6 +16,7 @@ app.add_middleware(
 )
 
 @app.get("/")
+@app.head("/")
 def root():
     return {"message": "Bienvenue sur notre API de transcription de texte en langue fon."}
 
